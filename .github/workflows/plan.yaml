@@ -1,9 +1,9 @@
 name: Terragrunt Plan
 
 on:
-  push:
+  pull_request:
     branches:
-      - 'feature/*'
+      - main
 
 jobs:
   terragrunt-plan:
