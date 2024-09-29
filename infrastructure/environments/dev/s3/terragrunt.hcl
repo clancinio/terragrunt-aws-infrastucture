@@ -15,7 +15,6 @@ locals {
 # Pass inputs from YAML file to Terraform module
 inputs = {
   bucket     = local.vars.bucket_name
-  acl        = local.vars.acl
   versioning = {
     enabled = local.vars.versioning.enabled
   }
