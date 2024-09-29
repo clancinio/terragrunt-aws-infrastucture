@@ -13,3 +13,15 @@ provider "aws" {
 }
 EOF
 }
+
+# Root configuration for all environments
+remote_state {
+  backend = "s3"
+
+  config = {
+    bucket  = "my-terraform-state-bucket"                # Replace with your S3 bucket name
+    key     = "${path_relative_to_include()}/terraform.tfstate"  # State file path based on folder structure
+    region  = "eu-west-1"                                # AWS region where your S3 bucket is located
+    encrypt = true                                       # Encrypt the state for security
+  }
+}
