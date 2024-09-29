@@ -1,0 +1,8 @@
+bucket_name: "my-app-artifacts-dev"
+region: "eu-west-1"
+acl: "private"
+versioning:
+  enabled: true
+tags:
+  Name: "my-app-artifacts-dev"
+  Environment: "dev"
