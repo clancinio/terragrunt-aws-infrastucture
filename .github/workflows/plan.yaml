@@ -25,5 +25,5 @@ jobs:
 
       - name: Terragrunt plan
         run: |
-          cd  /environments/dev/s3
+          cd  infrastructure/environments/dev/s3
           terragrunt plan
