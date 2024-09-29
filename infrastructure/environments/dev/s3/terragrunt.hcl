@@ -1,3 +1,8 @@
+# Include the root Terragrunt configuration
+include {
+  path = find_in_parent_folders()  # This will search upwards for the root terragrunt.hcl file
+}
+
 terraform {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git"
 }
@@ -5,17 +10,6 @@ terraform {
 # Load variables from YAML file
 locals {
   vars = yamldecode(file("${get_terragrunt_dir()}/variables.yaml"))
-}
-
-# Generate provider block for AWS
-generate "provider" {
-  path      = "${get_terragrunt_dir()}/provider.tf"
-  if_exists = "overwrite"
-  contents  = <<EOF
-provider "aws" {
-  region = "${local.vars.region}"
-}
-EOF
 }
 
 # Pass inputs from YAML file to Terraform module
