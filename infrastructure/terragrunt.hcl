@@ -13,3 +13,26 @@ provider "aws" {
 }
 EOF
 }
+
+# Remote state configuration (applies to all environments)
+remote_state {
+  backend = "s3"
+  config = {
+    bucket         = "your-remote-state-bucket-name"
+    key            = "${path_relative_to_include()}/terraform.tfstate"
+    region         = "eu-west-1"
+    encrypt        = true
+    dynamodb_table = "your-dynamodb-table-for-locking"
+  }
+}
+
+# Generate an empty backend block to satisfy Terraform
+generate "backend" {
+  path      = "${get_terragrunt_dir()}/backend.tf"
+  if_exists = "overwrite"
+  contents  = <<EOF
+terraform {
+  backend "s3" {}
+}
+EOF
+}
