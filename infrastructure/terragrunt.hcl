@@ -1,6 +1,6 @@
 # Root configuration for all environments
 terraform {
-  # No source here, each environment will define its own module source
+  backend "s3" {}
 }
 
 # Define AWS provider dynamically for each environment
@@ -26,13 +26,3 @@ remote_state {
   }
 }
 
-# Generate an empty backend block to satisfy Terraform
-generate "backend" {
-  path      = "${get_terragrunt_dir()}/backend.tf"
-  if_exists = "overwrite"
-  contents  = <<EOF
-terraform {
-  backend "s3" {}
-}
-EOF
-}
