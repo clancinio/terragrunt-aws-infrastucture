@@ -12,3 +12,15 @@ provider "aws" {
 }
 EOF
 }
+
+# Remote state configuration (applies to all environments)
+remote_state {
+  backend = "s3"
+  config  = {
+    bucket         = "your-remote-state-bucket"
+    key            = "${path_relative_to_include()}/terraform.tfstate"
+    region         = "eu-west-1"
+    encrypt        = true
+    dynamodb_table = "your-dynamodb-lock-table"  # Optional, for state locking
+  }
+}
