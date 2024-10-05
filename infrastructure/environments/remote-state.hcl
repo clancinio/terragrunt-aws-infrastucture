@@ -7,13 +7,13 @@ terraform {
 }
 
 # Remote state configuration for Dev environment
-inputs = {
-  bucket        = "your-remote-state-bucket-name"
-  versioning    = {
-    enabled = true
-  }
-  tags = {
-    Name        = "terraform-remote-state"
-    Environment = "dev"
+remote_state {
+  backend = "s3"
+  config = {
+    bucket         = "your-remote-state-bucket"
+    key            = "dev/terraform.tfstate"   # Unique key for dev environment
+    region         = "eu-west-1"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
   }
 }
