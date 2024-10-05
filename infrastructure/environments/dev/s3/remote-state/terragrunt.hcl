@@ -24,12 +24,3 @@ inputs = {
   }
 }
 
-# Define the backend for the remote state
-terraform {
-  backend "s3" {
-    bucket         = local.remote_state_bucket
-    key            = "dev/terraform.tfstate"      # Unique key for the environment
-    region         = "eu-west-1"                   # Your AWS region
-    encrypt        = true
-  }
-}
