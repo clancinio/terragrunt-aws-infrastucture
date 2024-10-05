@@ -1,5 +1,6 @@
 # Root configuration for all environments
 terraform {
+  backend "s3" {}
 }
 
 # Define AWS provider dynamically for each environment
