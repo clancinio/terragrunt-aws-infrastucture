@@ -5,8 +5,6 @@ include {
 
 terraform {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-s3-bucket.git"
-  # Adding an empty backend block is necessary
-  backend "s3" {}
 }
 
 # Load variables from YAML file
