@@ -23,7 +23,10 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Terragrunt plan
+      - name: Find and run Terragrunt plans in all directories
         run: |
-          cd  infrastructure/environments/dev/s3
-          terragrunt plan
+          # Find all directories with a terragrunt.hcl file
+          find infrastructure/environments -name terragrunt.hcl -execdir terragrunt plan -out plan.out \;
+
+        # The above line searches all directories under infrastructure/environments for terragrunt.hcl files
+        # and runs terragrunt plan for each.
