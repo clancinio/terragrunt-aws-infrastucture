@@ -14,6 +14,5 @@ remote_state {
     key            = "dev/terraform.tfstate"   # Unique key for dev environment
     region         = "eu-west-1"
     encrypt        = true
-    dynamodb_table = "terraform-locks"
   }
 }

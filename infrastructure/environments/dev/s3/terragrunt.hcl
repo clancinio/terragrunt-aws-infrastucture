@@ -18,5 +18,5 @@ inputs = {
   versioning = {
     enabled = local.vars.versioning.enabled
   }
-  tags       = local.vars.tags
+  tags = local.vars.tags
 }
