@@ -1,6 +1,6 @@
 # Include the root Terragrunt configuration
 include {
-  path = find_in_parent_folders()  # This will search upwards for the root terragrunt.hcl file
+  path = find_in_parent_folders()
 }
 
 terraform {
