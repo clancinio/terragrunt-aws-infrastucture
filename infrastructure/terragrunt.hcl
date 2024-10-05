@@ -1,6 +1,5 @@
 # Root configuration for all environments
 terraform {
-  backend "s3" {}
 }
 
 # Define AWS provider dynamically for each environment
@@ -8,6 +7,7 @@ generate "provider" {
   path      = "${get_terragrunt_dir()}/provider.tf"
   if_exists = "overwrite"
   contents  = <<EOF
+backend "s3" {}
 provider "aws" {
   region = "eu-west-1"
 }
