@@ -32,3 +32,4 @@ jobs:
         run: |
           # Find all directories with a *.hcl file and run terragrunt apply
           find infrastructure -type f -name "*.hcl" -execdir sh -c 'terragrunt apply plan.out || { echo "Terragrunt apply failed in $(pwd)"; exit 1; }' \;
+
