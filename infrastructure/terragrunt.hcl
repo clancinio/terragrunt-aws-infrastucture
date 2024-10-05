@@ -7,7 +7,9 @@ generate "provider" {
   path      = "${get_terragrunt_dir()}/provider.tf"
   if_exists = "overwrite"
   contents  = <<EOF
-backend "s3" {}
+terraform {
+ backend "s3" {}
+}
 provider "aws" {
   region = "eu-west-1"
 }
