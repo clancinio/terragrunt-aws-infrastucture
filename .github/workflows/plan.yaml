@@ -25,8 +25,5 @@ jobs:
 
       - name: Find and run Terragrunt plans in all directories
         run: |
-          # Find all directories with a *.hcl file
-          find infrastructure/environments -name *.hcl -execdir terragrunt plan -out plan.out \;
-
-        # The above line searches all directories under infrastructure/environments for terragrunt.hcl files
-        # and runs terragrunt plan for each.
+          # Find all directories with a *.hcl file and run terragrunt plan
+          find infrastructure -type f -name "*.hcl" -execdir terragrunt plan -out plan.out \;
