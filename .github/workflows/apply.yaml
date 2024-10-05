@@ -23,11 +23,6 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Find and run Terragrunt plans in all directories
-        run: |
-          # Find all directories with a *.hcl file and run terragrunt plan
-          find infrastructure -type f -name "*.hcl" -execdir sh -c 'terragrunt plan -out plan.out || { echo "Terragrunt plan failed in $(pwd)"; exit 1; }' \;
-
       - name: Find and run Terragrunt apply in all directories
         run: |
           # Find all directories with a *.hcl file and run terragrunt apply
