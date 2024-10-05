@@ -27,3 +27,9 @@ jobs:
         run: |
           # Find all directories with a *.hcl file and run terragrunt plan
           find infrastructure -type f -name "*.hcl" -execdir terragrunt plan -out plan.out \;
+
+      - name: Upload Plan Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: terragrunt-plans
+          path: infrastructure/**/plan.out

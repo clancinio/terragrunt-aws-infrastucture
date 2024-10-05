@@ -23,6 +23,11 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
+      - name: Download Plan Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: terragrunt-plans
+
       - name: Find and run Terragrunt apply in all directories
         run: |
           # Find all directories with a *.hcl file and run terragrunt apply
