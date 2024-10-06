@@ -23,13 +23,24 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Find and run Terragrunt plans in all directories
+      # Debug step: List files before running terragrunt plan
+      - name: List files in infrastructure before plan
         run: |
-          # Find all directories with a *.hcl file and run terragrunt plan
-          find infrastructure -type f -name "*.hcl" -execdir terragrunt plan -out plan.out \;
+          ls -al infrastructure
 
-      - name: Upload Plan Artifacts
+      - name: Run Terragrunt plan and generate one plan.out
+        run: |
+          cd infrastructure
+          terragrunt plan-all -out=plan.out  # This generates the plan.out inside the 'infrastructure' directory
+
+      # Debug step: List files after running terragrunt plan to check if plan.out was created
+      - name: List files in infrastructure after plan
+        run: |
+          ls -al infrastructure
+
+      - name: Upload Plan Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: terragrunt-plans
-          path: infrastructure/**/plan.out
+          name: terragrunt-plan
+          path: infrastructure/plan.out  # Upload from 'infrastructure' directory
+          if-no-files-found: warn
