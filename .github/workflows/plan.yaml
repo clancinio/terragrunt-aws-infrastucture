@@ -26,16 +26,16 @@ jobs:
       - name: Run Terragrunt plan and generate one plan.out
         run: |
           cd infrastructure
-          terragrunt plan-all -out=../plan.out  # Generate plan.out in root directory
+          terragrunt plan-all -out=plan.out  # Generate plan.out inside the 'infrastructure' directory
 
       # Debug step: Check if the plan.out file was generated and its location
-      - name: List root directory files
+      - name: List files in infrastructure
         run: |
-          ls -al ../
+          ls -al infrastructure
 
       - name: Upload Plan Artifact
         uses: actions/upload-artifact@v3
         with:
           name: terragrunt-plan
-          path: ../plan.out  # Adjust path to ensure root plan.out is uploaded
+          path: infrastructure/plan.out  # Upload from 'infrastructure' directory
           if-no-files-found: warn
