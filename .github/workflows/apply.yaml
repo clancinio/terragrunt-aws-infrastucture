@@ -23,13 +23,13 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
-      - name: Download Plan Artifacts
+      - name: Download Plan Artifact
         uses: actions/download-artifact@v3
         with:
-          name: terragrunt-plans
+          name: terragrunt-plan
 
-      - name: Find and run Terragrunt apply in all directories
+      - name: Apply Terragrunt plan
         run: |
-          # Find all directories with a *.hcl file and run terragrunt apply
-          find infrastructure -type f -name "*.hcl" -execdir sh -c 'terragrunt apply plan.out || { echo "Terragrunt apply failed in $(pwd)"; exit 1; }' \;
-
+          # Change to infrastructure directory and apply the plan.out file
+          cd infrastructure
+          terragrunt apply-all ../plan.out
