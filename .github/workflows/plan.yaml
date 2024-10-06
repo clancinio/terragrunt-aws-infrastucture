@@ -23,13 +23,18 @@ jobs:
           chmod +x terragrunt
           sudo mv terragrunt /usr/local/bin/
 
+      # Debug step: List files before running terragrunt plan
+      - name: List files in infrastructure before plan
+        run: |
+          ls -al infrastructure
+
       - name: Run Terragrunt plan and generate one plan.out
         run: |
           cd infrastructure
-          terragrunt plan-all -out=plan.out  # Generate plan.out inside the 'infrastructure' directory
+          terragrunt plan-all -out=plan.out  # This generates the plan.out inside the 'infrastructure' directory
 
-      # Debug step: Check if the plan.out file was generated and its location
-      - name: List files in infrastructure
+      # Debug step: List files after running terragrunt plan to check if plan.out was created
+      - name: List files in infrastructure after plan
         run: |
           ls -al infrastructure
 
